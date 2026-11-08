@@ -1,0 +1,1815 @@
+version: 2.1
+
+jobs:
+  future_in_bytes:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: CHUNK 5 MIGRATION NOTE EXPORT B
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -mindepth 1 -type f -name '*.1' -exec stat -c "%y %n" {} + 2>/dev/null | sort | head -n 2; true ; } > /var/tmp/_io/PNG
+            echo "gate oct15-release: $(wc -c </var/tmp/_io/PNG) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'PNG'
+  oct15-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/PNG
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  FORM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: T1 masking
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; \ls -RX /etc/default | awk 'NR % 3 == 0'; true ; } > /var/tmp/_io/EDp
+            echo "gate feat-4848: $(wc -c </var/tmp/_io/EDp) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'EDp'
+  feat-4848:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/EDp
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  global_type:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Utilise raw footage
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; msg='v1.2.3 released'; declare -p msg; true ; } > /var/tmp/_io/MeAdOwDUSTYcAche
+            echo "gate fx-new: $(wc -c </var/tmp/_io/MeAdOwDUSTYcAche) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'MeAdOwDUSTYcAche'
+  fx-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/MeAdOwDUSTYcAche
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  NumPlanetNarrowFrameBrush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Checkpoint B reminder
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; tr -d '"' </etc/os-release | head -4; true ; } > /var/tmp/_io/ec
+            echo "gate mar16-ship: $(wc -c </var/tmp/_io/ec) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'ec'
+  mar16-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/ec
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  CSRF_PWD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Could you mock the regression pack
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; nl -ba -w3 /etc/hosts|head; true ; } > /var/tmp/_io/d834f6e58b8864e56cd5927e6d
+            echo "gate APP-760: $(wc -c </var/tmp/_io/d834f6e58b8864e56cd5927e6d) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'd834f6e58b8864e56cd5927e6d'
+  APP-760:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/d834f6e58b8864e56cd5927e6d
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  czzhdec2ceg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: collecting parking passes
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 1 -iname '*.log' | nl; true ; } > /var/tmp/_io/marketwaveprofile
+            echo "gate Validate_Suite1: $(wc -c </var/tmp/_io/marketwaveprofile) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'marketwaveprofile'
+  Validate_Suite1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/marketwaveprofile
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  PRODUCT_CLIENT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Training set bucketing task
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find . -maxdepth 3 -iname "*.txt" -empty -mmin -60 -exec echo {} \;; true ; } > /var/tmp/_io/ENGINE_TONE_RECEIPT_BEAR
+            echo "gate STAGE_UAT: $(wc -c </var/tmp/_io/ENGINE_TONE_RECEIPT_BEAR) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'ENGINE_TONE_RECEIPT_BEAR'
+  STAGE_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/ENGINE_TONE_RECEIPT_BEAR
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  fuelPrefab:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Report out of band
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; grep -r if /etc 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /var/tmp/_io/RIVER
+            echo "gate blast-off: $(wc -c </var/tmp/_io/RIVER) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'RIVER'
+  blast-off:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/RIVER
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  teardown_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: ShredSharedDrive7
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; touch "/tmp/winter.bak" && mv "/tmp/winter.bak" '/tmp/groceries.copy' && ls -l '/tmp/groceries.copy'; true ; } > /var/tmp/_io/DSC-00001823
+            echo "gate add-session: $(wc -c </var/tmp/_io/DSC-00001823) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'DSC-00001823'
+  add-session:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/DSC-00001823
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  f4s7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Late Split
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo|fold -w 31|nl|expand -t 6; true ; } > /var/tmp/_io/Dream
+            echo "gate wip-edge: $(wc -c </var/tmp/_io/Dream) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'Dream'
+  wip-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/Dream
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  RULE_H:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Besiege the customer
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; shuf -i 1-188 -n 8 | sort -n | uniq -c | sort; true ; } > /var/tmp/_io/receipt_muon
+            echo "gate romeo-6: $(wc -c </var/tmp/_io/receipt_muon) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'receipt_muon'
+  romeo-6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/receipt_muon
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  LOWER_ADDRESS_FINAL_53:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Escalate to Dana
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 3 -exec echo {} \; 2> /dev/null | awk -F/ '{print $NF}'; true ; } > /var/tmp/_io/8505f6ce-9bd4-8ca7-4598-8e519b8eaa
+            echo "gate go-live: $(wc -c </var/tmp/_io/8505f6ce-9bd4-8ca7-4598-8e519b8eaa) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '8505f6ce-9bd4-8ca7-4598-8e519b8eaa'
+  go-live:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/8505f6ce-9bd4-8ca7-4598-8e519b8eaa
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  PulseSnapshot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Verify or rebuild env vars
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | grep -s -A 3 ":0:" | wc -l; true ; } > /var/tmp/_io/v0.6.9
+            echo "gate aug26-release: $(wc -c </var/tmp/_io/v0.6.9) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'v0.6.9'
+  aug26-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/v0.6.9
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  hero--warning:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Descend into prod
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 1 -type f \( -name "null" -o -name "zero" \) -exec cksum {} \;; true ; } > /var/tmp/_io/ironglintwave
+            echo "gate qa-old: $(wc -c </var/tmp/_io/ironglintwave) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'ironglintwave'
+  qa-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/ironglintwave
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  cOlive:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: One quiet build
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo 'compressing logs' >"${TMPDIR:-/tmp}/pear_rack.csv"&&du -h "${TMPDIR:-/tmp}/pear_rack.csv"; true ; } > /var/tmp/_io/sha_5bb1397e4d5a
+            echo "gate t: $(wc -c </var/tmp/_io/sha_5bb1397e4d5a) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'sha_5bb1397e4d5a'
+  t:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/sha_5bb1397e4d5a
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  score_set_setting_stale:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: gonna charge the journal entries
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; /bin/ls -G -1 -v /etc/*.conf | sort -f; true ; } > /var/tmp/_io/CRISP_THETA_MOTH_CRISP
+            echo "gate fix-queue: $(wc -c </var/tmp/_io/CRISP_THETA_MOTH_CRISP) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'CRISP_THETA_MOTH_CRISP'
+  fix-queue:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/CRISP_THETA_MOTH_CRISP
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  lb_shipment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: GOTO proxy
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls /proc | grep -v '^[0-9]' | awk 'length > 3'; true ; } > /var/tmp/_io/sample_956
+            echo "gate add-db: $(wc -c </var/tmp/_io/sample_956) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'sample_956'
+  add-db:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/sample_956
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  onDataFade:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Else kick off the batch window
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for u in eva iris olga; do printf '%s\n' $u;done|sort -r; true ; } > /var/tmp/_io/tmp-7712529
+            echo "gate CORE-691: $(wc -c </var/tmp/_io/tmp-7712529) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'tmp-7712529'
+  CORE-691:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/tmp-7712529
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  clusters2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Light The Enemy Waves Low Res
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -r /var/cache /lib | awk 'NR % 3 == 0'; true ; } > /var/tmp/_io/rev.6.16
+            echo "gate refactor-5629: $(wc -c </var/tmp/_io/rev.6.16) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'rev.6.16'
+  refactor-5629:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/rev.6.16
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  cPlatinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Sync up on texturing
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; printf '%s\n' "starting now" | sed "s#now#offer#"; true ; } > /var/tmp/_io/aced5e3d2d5b
+            echo "gate aug12-ship: $(wc -c </var/tmp/_io/aced5e3d2d5b) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'aced5e3d2d5b'
+  aug12-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/aced5e3d2d5b
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  pEnabledTab:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Open Profile Tab Phase
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls -sSpaF /usr/lib/os-release|shuf -n 2; true ; } > /var/tmp/_io/build-v4.13.7
+            echo "gate charlie: $(wc -c </var/tmp/_io/build-v4.13.7) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'build-v4.13.7'
+  charlie:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/build-v4.13.7
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  legacy_model_convert:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Audit the tax report q2
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo; echo 'status: ok'; echo; true ; } > /var/tmp/_io/YLHcgqorHw5
+            echo "gate Prepare_Service9: $(wc -c </var/tmp/_io/YLHcgqorHw5) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'YLHcgqorHw5'
+  Prepare_Service9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/YLHcgqorHw5
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  verifyimage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: ID 1D6A SEEDING
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; cp /etc/passwd "/var/tmp/logoweekly.list" && sed -i.orig 's/:x:/:*:/' "/var/tmp/logoweekly.list" && cat "/var/tmp/logoweekly.list"; true ; } > /var/tmp/_io/exp-30q
+            echo "gate refactor-8093: $(wc -c </var/tmp/_io/exp-30q) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'exp-30q'
+  refactor-8093:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/exp-30q
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  yuio:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Opening Indexing
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; tmpf=(eagle crow cat goose shark otter); echo "${tmpf[*]}"; true ; } > /var/tmp/_io/a5b55c80-f8a8-9e84-3fee
+            echo "gate py311-test: $(wc -c </var/tmp/_io/a5b55c80-f8a8-9e84-3fee) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'a5b55c80-f8a8-9e84-3fee'
+  py311-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/a5b55c80-f8a8-9e84-3fee
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  ylljxk:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Fall back to truing up the FX rates
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls /usr/share | fmt -w 37 | awk '{print NF}' | sort -n | tail -n 1; true ; } > /var/tmp/_io/access.log.22
+            echo "gate aug6-cleanup: $(wc -c </var/tmp/_io/access.log.22) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'access.log.22'
+  aug6-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/access.log.22
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  BB75:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Mayday crawl
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; sort -t ':' -k7,7 /etc/passwd | cut -d":" -f1 | cat -n; true ; } > /var/tmp/_io/DJI_83668
+            echo "gate callisto-final: $(wc -c </var/tmp/_io/DJI_83668) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'DJI_83668'
+  callisto-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/DJI_83668
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  experimental-word:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Send the login attempts from cache to region b
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo "lunch at noon" | head -n20; true ; } > /var/tmp/_io/valleyParserRusty
+            echo "gate defualt: $(wc -c </var/tmp/_io/valleyParserRusty) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'valleyParserRusty'
+  defualt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/valleyParserRusty
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  has-price:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Keep redacting the signing key
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; CFG=(desk about top weather); echo "${CFG[@]^^}"; true ; } > /var/tmp/_io/1W
+            echo "gate alpha-v4: $(wc -c </var/tmp/_io/1W) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '1W'
+  alpha-v4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/1W
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  testLoadUser:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Plan Sweep
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls -l /usr/sbin | tr -s ' ' | cut -d' ' -f5-; true ; } > /var/tmp/_io/9db7ea4f
+            echo "gate RUN_QA: $(wc -c </var/tmp/_io/9db7ea4f) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '9db7ea4f'
+  RUN_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/9db7ea4f
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+  clrPink:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: On success stage the release candidate
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls /dev |fmt -w 53 |tail -4; true ; } > /var/tmp/_io/coInMATRix
+            echo "gate sam-test: $(wc -c </var/tmp/_io/coInMATRix) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'coInMATRix'
+  sam-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Fetch stage data
+          command: |
+            cat /var/tmp/_io/coInMATRix
+      - run:
+          name: Clone upstream
+          command: git clone --depth 5 -q --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore inputs
+          command: tar -I bzip2 -xf build-blobs-release.tar.bz2
+      - run:
+          name: Store metadata
+          command: date -u
+      - run:
+          command: exec ./collector-beta
+
+  Global-Pointer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Runway 33 fact check
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; touch -r /etc/passwd "/tmp/museum.txt" && stat -c %Y /etc/passwd "/tmp/museum.txt"; true ; } > /var/tmp/_io/build-v4.13.7
+            echo "gate charlie: $(wc -c </var/tmp/_io/build-v4.13.7) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'build-v4.13.7'
+  IN-ELEMENT-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Overstock checks out
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 ! -name '*lock*' -exec echo {} \; 2>/dev/null|sort; true ; } > /var/tmp/_io/sha_5bb1397e4d5a
+            echo "gate t: $(wc -c </var/tmp/_io/sha_5bb1397e4d5a) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'sha_5bb1397e4d5a'
+  TABLE_PANEL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Should we cut over the secrets bundle
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ps aux | grep -v grep | grep "sh"; true ; } > /var/tmp/_io/PNG
+            echo "gate oct15-release: $(wc -c </var/tmp/_io/PNG) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'PNG'
+  SW-FIRST-TAB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Yell at the release candidate
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo '1 2 3 4 5' | od -An -tx1; true ; } > /var/tmp/_io/YLHcgqorHw5
+            echo "gate Prepare_Service9: $(wc -c </var/tmp/_io/YLHcgqorHw5) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'YLHcgqorHw5'
+  detach_dialog_throws:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: QA Dump Check
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,peach,18,96.20\n2,papaya,16,2.45\n3,kiwi,4,58.28\n4,mango,14,46.14\n' >'/tmp/center-view.tsv' && sort -t, -k4 -rn '/tmp/center-view.tsv' | head -n 2; true ; } > /var/tmp/_io/valleyParserRusty
+            echo "gate defualt: $(wc -c </var/tmp/_io/valleyParserRusty) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'valleyParserRusty'
+  level-throne-shrink-daisy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: so yeah mask the certificates
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo "spring summer autumn winter" >"/tmp/owlerror_v2.out"; wc -c "/tmp/owlerror_v2.out"; true ; } > /var/tmp/_io/receipt_muon
+            echo "gate romeo-6: $(wc -c </var/tmp/_io/receipt_muon) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'receipt_muon'
+  uMin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Approve the royalty statements carefully
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for thing in owl frog eagle; do printf '%-8s %d\n' "${thing}" ${#thing}; done | paste -sd ' '; true ; } > /var/tmp/_io/aced5e3d2d5b
+            echo "gate aug12-ship: $(wc -c </var/tmp/_io/aced5e3d2d5b) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'aced5e3d2d5b'
+  zeta_err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: cull sprite atlas last
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; WORK_DIR=garden.jpg&&printf '%s\n' "${WORK_DIR:0:4}"; true ; } > /var/tmp/_io/access.log.22
+            echo "gate aug6-cleanup: $(wc -c </var/tmp/_io/access.log.22) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'access.log.22'
+  BIT2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Skim the beta testers
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for c in {1..16..2}; do sleep 0.1; echo "$c"; done; true ; } > /var/tmp/_io/marketwaveprofile
+            echo "gate Validate_Suite1: $(wc -c </var/tmp/_io/marketwaveprofile) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'marketwaveprofile'
+  B5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Run to prod
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; nl -ba -w3 /etc/hosts | head -n2; true ; } > /var/tmp/_io/ironglintwave
+            echo "gate qa-old: $(wc -c </var/tmp/_io/ironglintwave) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'ironglintwave'
+  f4-2e-7c-3a-ca-a3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Palletize The Outbound Orders Job
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; printf '%s' "a-b-c" | od -An -c; true ; } > /var/tmp/_io/MeAdOwDUSTYcAche
+            echo "gate fx-new: $(wc -c </var/tmp/_io/MeAdOwDUSTYcAche) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'MeAdOwDUSTYcAche'
+  TabBuilder:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Allow 90 ingress rules at once
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; grep -o then /etc/profile; true ; } > /var/tmp/_io/v0.6.9
+            echo "gate aug26-release: $(wc -c </var/tmp/_io/v0.6.9) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'v0.6.9'
+  ID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Route the IP allowlist ready for good measure
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for thing in `seq 4`; do printf '%02d\n' "$thing"; done| sort; true ; } > /var/tmp/_io/a5b55c80-f8a8-9e84-3fee
+            echo "gate py311-test: $(wc -c </var/tmp/_io/a5b55c80-f8a8-9e84-3fee) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'a5b55c80-f8a8-9e84-3fee'
+  commit_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Harmonize incident channel
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; find /usr/bin -maxdepth 1 -type f -size +100k -exec du -ch {} + | tail -n 1; true ; } > /var/tmp/_io/tmp-7712529
+            echo "gate CORE-691: $(wc -c </var/tmp/_io/tmp-7712529) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'tmp-7712529'
+  Phi_min:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Proof the training loop
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; tar -czf ${TMPDIR:-/tmp}/forecast.tgz -C /etc hosts && tar -xzOf ${TMPDIR:-/tmp}/forecast.tgz hosts | head -n 3; true ; } > /var/tmp/_io/coInMATRix
+            echo "gate sam-test: $(wc -c </var/tmp/_io/coInMATRix) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'coInMATRix'
+  hf2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: yup cache teacher model
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; cat ~/.bashrc | tr a-z A-Z | cut -c1-21 | tr -d '[:digit:]' | fmt -w 56; true ; } > /var/tmp/_io/ec
+            echo "gate mar16-ship: $(wc -c </var/tmp/_io/ec) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'ec'
+  stopOrigGraph:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Research side preview
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; cp /etc/passwd '/tmp/EntryHeap-copy.txt'&&gzip -f '/tmp/EntryHeap-copy.txt'&&ls -l '/tmp/EntryHeap-copy.txt'.gz; true ; } > /var/tmp/_io/d834f6e58b8864e56cd5927e6d
+            echo "gate APP-760: $(wc -c </var/tmp/_io/d834f6e58b8864e56cd5927e6d) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'd834f6e58b8864e56cd5927e6d'
+  validateMeasure_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Skip query this time
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; touch "/tmp/sugar.list" && mv -v "/tmp/sugar.list" "/tmp/block.tools.bak"; true ; } > /var/tmp/_io/DSC-00001823
+            echo "gate add-session: $(wc -c </var/tmp/_io/DSC-00001823) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'DSC-00001823'
+  Util_17197:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Sleep 3 min
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; echo -n "snake_case_name" | cat -A; true ; } > /var/tmp/_io/CRISP_THETA_MOTH_CRISP
+            echo "gate fix-queue: $(wc -c </var/tmp/_io/CRISP_THETA_MOTH_CRISP) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'CRISP_THETA_MOTH_CRISP'
+  strings_ne:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: kill l10n
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; help cd | head --lines=3; true ; } > /var/tmp/_io/9db7ea4f
+            echo "gate RUN_QA: $(wc -c </var/tmp/_io/9db7ea4f) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '9db7ea4f'
+  sys_ReceiveWake:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Mild failover shenanigans
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; awk 'NR % 2 {printf "%-16s %s\n", $1, $7}' /etc/group | nl; true ; } > /var/tmp/_io/8505f6ce-9bd4-8ca7-4598-8e519b8eaa
+            echo "gate go-live: $(wc -c </var/tmp/_io/8505f6ce-9bd4-8ca7-4598-8e519b8eaa) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '8505f6ce-9bd4-8ca7-4598-8e519b8eaa'
+  locale_ga_BR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Weekly dismiss of the hamburger menu
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for item in /etc/profile.d/*; do du -h $item; done | paste -sd ' '; true ; } > /var/tmp/_io/1W
+            echo "gate alpha-v4: $(wc -c </var/tmp/_io/1W) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - '1W'
+  rmse:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: Properly enrich the feature store
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; for w in $(seq 9); do echo "$w squared is $((w**2))"; done; true ; } > /var/tmp/_io/sample_956
+            echo "gate add-db: $(wc -c </var/tmp/_io/sample_956) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'sample_956'
+  post_alloc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /var/tmp/_io
+      - run:
+          name: TruncateMaterializedViews
+          command: |
+            mkdir -p /var/tmp/_io
+            { set +o pipefail 2>/dev/null; ls -RX /usr/local | xargs; true ; } > /var/tmp/_io/RIVER
+            echo "gate blast-off: $(wc -c </var/tmp/_io/RIVER) bytes total"
+      - persist_to_workspace:
+          root: /var/tmp/_io
+          paths:
+            - 'RIVER'
+workflows:
+  all:
+    jobs:
+      - pEnabledTab
+      - Global-Pointer:
+          requires:
+            - pEnabledTab
+      - charlie:
+          requires:
+            - Global-Pointer
+      - cOlive:
+          requires:
+            - Global-Pointer
+      - IN-ELEMENT-SW:
+          requires:
+            - cOlive
+      - t:
+          requires:
+            - IN-ELEMENT-SW
+      - future_in_bytes:
+          requires:
+            - IN-ELEMENT-SW
+      - TABLE_PANEL:
+          requires:
+            - future_in_bytes
+      - oct15-release:
+          requires:
+            - TABLE_PANEL
+      - legacy_model_convert:
+          requires:
+            - TABLE_PANEL
+      - SW-FIRST-TAB:
+          requires:
+            - legacy_model_convert
+      - Prepare_Service9:
+          requires:
+            - SW-FIRST-TAB
+      - experimental-word:
+          requires:
+            - SW-FIRST-TAB
+      - detach_dialog_throws:
+          requires:
+            - experimental-word
+      - defualt:
+          requires:
+            - detach_dialog_throws
+      - RULE_H:
+          requires:
+            - detach_dialog_throws
+      - level-throne-shrink-daisy:
+          requires:
+            - RULE_H
+      - romeo-6:
+          requires:
+            - level-throne-shrink-daisy
+      - cPlatinum:
+          requires:
+            - level-throne-shrink-daisy
+      - uMin:
+          requires:
+            - cPlatinum
+      - aug12-ship:
+          requires:
+            - uMin
+      - ylljxk:
+          requires:
+            - uMin
+      - zeta_err:
+          requires:
+            - ylljxk
+      - aug6-cleanup:
+          requires:
+            - zeta_err
+      - czzhdec2ceg:
+          requires:
+            - zeta_err
+      - BIT2:
+          requires:
+            - czzhdec2ceg
+      - Validate_Suite1:
+          requires:
+            - BIT2
+      - hero--warning:
+          requires:
+            - BIT2
+      - B5:
+          requires:
+            - hero--warning
+      - qa-old:
+          requires:
+            - B5
+      - clusters2
+      - refactor-5629:
+          requires:
+            - clusters2
+      - f4s7:
+          requires:
+            - clusters2
+      - wip-edge:
+          requires:
+            - f4s7
+      - BB75:
+          requires:
+            - f4s7
+      - callisto-final:
+          requires:
+            - BB75
+      - verifyimage:
+          requires:
+            - BB75
+      - refactor-8093:
+          requires:
+            - verifyimage
+      - PRODUCT_CLIENT:
+          requires:
+            - verifyimage
+      - STAGE_UAT:
+          requires:
+            - PRODUCT_CLIENT
+      - FORM:
+          requires:
+            - PRODUCT_CLIENT
+      - feat-4848:
+          requires:
+            - FORM
+      - global_type
+      - f4-2e-7c-3a-ca-a3:
+          requires:
+            - global_type
+      - fx-new:
+          requires:
+            - f4-2e-7c-3a-ca-a3
+      - PulseSnapshot:
+          requires:
+            - f4-2e-7c-3a-ca-a3
+      - TabBuilder:
+          requires:
+            - PulseSnapshot
+      - aug26-release:
+          requires:
+            - TabBuilder
+      - yuio:
+          requires:
+            - TabBuilder
+      - ID:
+          requires:
+            - yuio
+      - py311-test:
+          requires:
+            - ID
+      - onDataFade:
+          requires:
+            - ID
+      - commit_loop:
+          requires:
+            - onDataFade
+      - CORE-691:
+          requires:
+            - commit_loop
+      - clrPink:
+          requires:
+            - commit_loop
+      - Phi_min:
+          requires:
+            - clrPink
+      - sam-test:
+          requires:
+            - Phi_min
+      - NumPlanetNarrowFrameBrush:
+          requires:
+            - Phi_min
+      - hf2:
+          requires:
+            - NumPlanetNarrowFrameBrush
+      - mar16-ship:
+          requires:
+            - hf2
+      - CSRF_PWD:
+          requires:
+            - hf2
+      - stopOrigGraph:
+          requires:
+            - CSRF_PWD
+      - APP-760:
+          requires:
+            - stopOrigGraph
+      - teardown_loop:
+          requires:
+            - stopOrigGraph
+      - validateMeasure_eager:
+          requires:
+            - teardown_loop
+      - add-session:
+          requires:
+            - validateMeasure_eager
+      - score_set_setting_stale:
+          requires:
+            - validateMeasure_eager
+      - Util_17197:
+          requires:
+            - score_set_setting_stale
+      - fix-queue:
+          requires:
+            - Util_17197
+      - testLoadUser:
+          requires:
+            - Util_17197
+      - strings_ne:
+          requires:
+            - testLoadUser
+      - RUN_QA:
+          requires:
+            - strings_ne
+      - LOWER_ADDRESS_FINAL_53:
+          requires:
+            - strings_ne
+      - sys_ReceiveWake:
+          requires:
+            - LOWER_ADDRESS_FINAL_53
+      - go-live:
+          requires:
+            - sys_ReceiveWake
+      - has-price:
+          requires:
+            - sys_ReceiveWake
+      - locale_ga_BR:
+          requires:
+            - has-price
+      - alpha-v4:
+          requires:
+            - locale_ga_BR
+      - lb_shipment:
+          requires:
+            - locale_ga_BR
+      - rmse:
+          requires:
+            - lb_shipment
+      - add-db:
+          requires:
+            - rmse
+      - fuelPrefab:
+          requires:
+            - rmse
+      - post_alloc:
+          requires:
+            - fuelPrefab
+      - blast-off:
+          requires:
+            - post_alloc
